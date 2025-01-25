@@ -62,7 +62,7 @@ def signUp():
         # Check if password length is valid
         elif len(password1) < 5:
             flash('Password should be at least 5 characters long!', category='error')
-            return jsonify({"error": "Password should be at least 8 characters long!"}), 400
+            return jsonify({"error": "Password should be at least 5 characters long!"}), 400
 
         # If all checks pass, create the user
         new_user = User(username=username, email=email, password=password1)

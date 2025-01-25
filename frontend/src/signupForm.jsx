@@ -10,7 +10,6 @@ function CreateUser(){
         event.preventDefault();
         console.log("Form submitted:", { username, email, password1, password2});
 
-        // url = "http://127.0.0.1:5000/signup";
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -49,23 +48,31 @@ function CreateUser(){
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input type="text" name="username" value={username} onChange={(e) => setName(e.target.value)} />
-            </label>
-            <label>
-                Email:
-                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </label>
-            <label>
-                Password:
-                <input type="password" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
-            </label>
-            <label>
-                Confirm Password:
-                <input type="password" name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
-            </label>
-            <input type="submit" value="Submit" />
+            <div >
+                <label  class="form-label">
+                    Username:
+                    <input type="text" class="form-control" id="floatingInput" name="username" value={username} onChange={(e) => setName(e.target.value)} />
+                </label>
+            </div>
+            <div >
+                <label>
+                    Email:
+                    <input type="email" class="form-control" id="floatingInput" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </label>
+            </div>
+            <div > 
+                <label>
+                    Password:
+                    <input type="password" class="form-control" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
+                </label>
+            </div>
+            <div >
+                <label>
+                    Confirm Password:
+                    <input type="password" class="form-control" id="floatingPassword" name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
+                </label>
+            </div>
+            <input class="btn" type="submit" value="Submit" />
         </form>
     );
 }
