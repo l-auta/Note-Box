@@ -47,27 +47,30 @@ function CreateUser(){
     }
 
     return (
-        <>
-        <form class="container" onSubmit={handleSubmit}>
-            <div >
+        < >
+        <h1 style={{ marginLeft: '10px' }} class="display-2">Sign Up Form</h1>
+        <p style={{ marginLeft: '10px' }} class="lead">Please fill in this form to create an account.</p>
+        <br />
+        <form class="container row" onSubmit={handleSubmit}>
+            <div  class="row mb-3">
                 <label  class="form-label">
                     Username:
                     <input type="text" class="form-control" id="floatingInput" name="username" value={username} onChange={(e) => setName(e.target.value)} />
                 </label>
             </div>
-            <div >
+            <div  class="row mb-3">
                 <label>
                     Email:
                     <input type="email" class="form-control" id="floatingInput" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
             </div>
-            <div > 
+            <div class="row mb-3"> 
                 <label>
                     Password:
                     <input type="password" class="form-control" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
                 </label>
             </div>
-            <div>
+            <div class="row mb-3">
                 <label>
                     Confirm Password:
                     <input type="password" class="form-control" id="floatingPassword" name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
@@ -76,7 +79,9 @@ function CreateUser(){
             <br />
             <input class="btn " type="submit" value="Submit" />
         </form>
-        <div class="card">
+        < br />
+        < br />
+        <div class="card text-center">
             <div class="card-header">
                 Quote
             </div>
