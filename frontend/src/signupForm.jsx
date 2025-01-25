@@ -47,7 +47,8 @@ function CreateUser(){
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+        <form class="container" onSubmit={handleSubmit}>
             <div >
                 <label  class="form-label">
                     Username:
@@ -66,14 +67,27 @@ function CreateUser(){
                     <input type="password" class="form-control" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
                 </label>
             </div>
-            <div >
+            <div>
                 <label>
                     Confirm Password:
                     <input type="password" class="form-control" id="floatingPassword" name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </label>
             </div>
-            <input class="btn" type="submit" value="Submit" />
+            <br />
+            <input class="btn " type="submit" value="Submit" />
         </form>
+        <div class="card">
+            <div class="card-header">
+                Quote
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>A well-known quote, contained in a blockquote element.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+        </>
     );
 }
 
