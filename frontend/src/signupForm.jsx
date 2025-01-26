@@ -47,7 +47,7 @@ function CreateUser(){
     }
 
     return (
-        < >
+        <>
         <h1 style={{ marginLeft: '10px' }} class="display-2">Sign Up Form</h1>
         <p style={{ marginLeft: '10px' }} class="lead">Please fill in this form to create an account.</p>
         <br />
@@ -87,8 +87,8 @@ function CreateUser(){
             </div>
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <p>A well-known quote, contained in a blockquote element.</p>
-                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    <p>You can make anything by writing</p>
+                    <footer class="blockquote-footer">Anonymous</footer>
                 </blockquote>
             </div>
         </div>

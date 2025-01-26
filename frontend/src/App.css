@@ -1,0 +1,9 @@
+body {
+    background: linear-gradient(to top left, #f7cac2, #fdc4bbfd, #faa493); /* Peachy tones for a calm feel */
+    font-family: 'Lora', serif; /* Serif font for elegance and readability */
+    color: #4f2f26; /* Deep brown for readability */
+    line-height: 1.8;
+    margin: 0;
+    padding: 20px;
+  }
+  
