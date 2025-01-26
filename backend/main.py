@@ -1,12 +1,24 @@
 from flask import Flask, request, flash,  jsonify
 from config import app, db
 from models import User, Note
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # DEFINE THE ROUTES
 # LOGIN ROUTE
-@app.route('/login')
+@app.route('/login', method = 'POST')
 def login():
-    return 'Welcome to the login page!'
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    # Find the user by email
+    user = User.query.filter_by(email=email).first()
+
+    if user and check_password_hash(user.password, password):  # Check if passwords match
+        return jsonify({"message": "Login successful!"}), 200
+    else:
+        return jsonify({"message": "Invalid credentials. Please check your email and password."}), 400
+
 
 # LOGOUT ROUTE
 @app.route('/logout')

@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 
-function CreateUser(){
+function CreateUser({ onSignupSuccess }){
     const [username, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password1, setPassword] = useState("");
@@ -37,6 +37,9 @@ function CreateUser(){
             window.alert("Password should be at least 5 characters long");
             return;
         }
+        if (username && email && password1 && password2) {
+            onSignupSuccess(); // Call the parent function to go to login page
+        } 
         
 
         // clear the form after a successful submission
