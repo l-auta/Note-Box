@@ -1,25 +1,35 @@
 from flask import Flask, request, flash,  jsonify
 from config import app, db
+import hashlib
 from models import User, Note
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # DEFINE THE ROUTES
 # LOGIN ROUTE
-@app.route('/login', method = 'POST')
+@app.route('/login', methods=['POST'])
 def login():
+    # Get data from the request
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
 
-    # Find the user by email
+    # Check if email and password are provided
+    if not email or not password:
+        return jsonify({'message': 'Email and password are required'}), 400
+
+    # Query the database to find the user
     user = User.query.filter_by(email=email).first()
 
-    if user and check_password_hash(user.password, password):  # Check if passwords match
-        return jsonify({"message": "Login successful!"}), 200
+    if user:
+        # Compare the hashed password using check_password_hash
+        if check_password_hash(user.password, password):  # This compares the entered password with the stored hash
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            return jsonify({'message': 'Invalid password'}), 401
     else:
-        return jsonify({"message": "Invalid credentials. Please check your email and password."}), 400
-
-
+        return jsonify({'message': 'User not found'}), 404
+ 
+ 
 # LOGOUT ROUTE
 @app.route('/logout')
 def logout():
@@ -77,7 +87,7 @@ def signUp():
             return jsonify({"error": "Password should be at least 5 characters long!"}), 400
 
         # Hash the password
-        hashed_password = generate_password_hash(password1, method='sha256')
+        hashed_password = generate_password_hash(password1)
         
         # If all checks pass, create the user
         new_user = User(username=username, email=email, password=hashed_password)
