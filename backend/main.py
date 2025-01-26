@@ -76,8 +76,11 @@ def signUp():
             flash('Password should be at least 5 characters long!', category='error')
             return jsonify({"error": "Password should be at least 5 characters long!"}), 400
 
+        # Hash the password
+        hashed_password = generate_password_hash(password1, method='sha256')
+        
         # If all checks pass, create the user
-        new_user = User(username=username, email=email, password=password1)
+        new_user = User(username=username, email=email, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
 
