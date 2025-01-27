@@ -1,4 +1,4 @@
-from flask import Flask, request, flash,  jsonify
+from flask import Flask, session, request, flash,  jsonify
 from config import app, db
 import hashlib
 from models import User, Note
@@ -23,13 +23,15 @@ def login():
     if user:
         # Compare the hashed password using check_password_hash
         if check_password_hash(user.password, password):  # This compares the entered password with the stored hash
+            # User is authenticated, set the user ID in the session
+            session['user_id'] = user.id
             return jsonify({'message': 'Login successful'}), 200
         else:
             return jsonify({'message': 'Invalid password'}), 401
     else:
         return jsonify({'message': 'User not found'}), 404
  
- 
+
 # LOGOUT ROUTE
 @app.route('/logout')
 def logout():
@@ -99,6 +101,89 @@ def signUp():
 
     return jsonify({"message": "Please send a POST request to create a user."}), 200
 
+# adding notes to the user
+@app.route('/notes', methods=['POST'])
+def create_note():
+    user_id = session.get('user_id')  # Ensure the user is logged in
+    if not user_id:
+        return jsonify({'message': 'You must be logged in to create a note'}), 401
+
+    data = request.get_json()  # Get JSON data from the request
+    title = data.get('title')
+    content = data.get('content')
+
+    # Validation
+    if not title or not content:
+        return jsonify({'message': 'Title and content are required'}), 400
+
+    # Create and add the new note
+    new_note = Note(title=title, content=content, user_id=user_id)
+
+    try:
+        db.session.add(new_note)
+        db.session.commit()
+        return jsonify({'id': new_note.id, 'title': new_note.title, 'content': new_note.content}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    
+# get notes from the db
+@app.route('/notes', methods=['GET'])
+def get_notes():
+    user_id = session.get('user_id')  # Ensure the user is logged in
+    if not user_id:
+        return jsonify({'message': 'You must be logged in to get notes'}), 401
+
+    notes = Note.query.filter_by(user_id=user_id).all()
+
+    return jsonify([{'id': note.id, 'title': note.title, 'content': note.content} for note in notes])
+
+# update notes in the db
+@app.route('/notes/<int:id>', methods=['PATCH'])
+def update_note(id):
+    user_id = session.get('user_id')  # Ensure the user is logged in
+    if not user_id:
+        return jsonify({'message': 'You must be logged in to update a note'}), 401
+
+    note = Note.query.filter_by(id=id, user_id=user_id).first()  # Find the note by ID and user ID
+    if not note:
+        return jsonify({'message': 'Note not found or you are not authorized to edit this note'}), 404
+
+    data = request.get_json()  # Get updated data from the request
+    title = data.get('title')
+    content = data.get('content')
+
+    if title:
+        note.title = title
+    if content:
+        note.content = content
+
+    try:
+        db.session.commit()
+        return jsonify({'id': note.id, 'title': note.title, 'content': note.content}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    
+# delete notes from the db
+@app.route('/notes/<int:id>', methods=['DELETE'])
+def delete_note(id):
+    user_id = session.get('user_id')  # Ensure the user is logged in
+    if not user_id:
+        return jsonify({'message': 'You must be logged in to delete a note'}), 401
+
+    note = Note.query.filter_by(id=id, user_id=user_id).first()  # Find the note by ID and user ID
+    if not note:
+        return jsonify({'message': 'Note not found or you are not authorized to delete this note'}), 404
+
+    try:
+        db.session.delete(note)  # Delete the note
+        db.session.commit()
+        return jsonify({'message': 'Note deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    
 
 if __name__ == '__main__':
     with app.app_context():

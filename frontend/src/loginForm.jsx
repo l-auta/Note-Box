@@ -22,7 +22,7 @@ const LoginPage = ({ onLoginSuccess }) => {
       
       if (response.ok) {
         // Login was successful
-        onLoginSuccess(data.message); // Pass success message or trigger route change
+        onLoginSuccess(); // Pass success message or trigger route change
       } else {
         // Show error message if login failed
         setError(data.message);
