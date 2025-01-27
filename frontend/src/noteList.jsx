@@ -1,36 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const NotesPage = () => {
-    const handleLogout = async () => {
-        try {
-            // Make a POST request to the logout endpoint
-            const response = await fetch('http://127.0.0.1:5000/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const data = await response.json();
+const NotesList = () => {
+  const [notes, setNotes] = useState([]);
+  const [error, setError] = useState('');
 
-            if (response.ok) {
-                // Handle successful logout (e.g., redirect to the login page)
-                console.log(data.message);  // Success message
-                window.location.href = "/login";  // Redirect to login page after logout
-            } else {
-                console.error('Error logging out:', data.message);
-            }
-        } catch (error) {
-            console.error('Error:', error);
+  // Fetch notes when the component mounts
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/notes', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',  // Make sure cookies (session) are sent with the request
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setNotes(data); // Store the notes in state
+        } else {
+          const data = await response.json();
+          setError(data.message); // Show error message if the response is not OK
         }
+      } catch (err) {
+        setError('An error occurred while fetching notes.'); // Handle fetch error
+      }
     };
 
-    return (
-        <div>
-            <h1>Welcome to the Notes Page</h1>
-            {/* Logout Button */}
-            <button style={{'color':'black'}} onClick={handleLogout}>Logout</button>
-        </div>
-    );
+    fetchNotes(); // Call the function when the component mounts
+  }, []); // Empty dependency array means this runs only once when the component mounts
+
+
+  const handleDelete = (id) => {
+    fetch(`http://127.0.0.1:5000/notes/${id}`, { method: 'DELETE' })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === 'Note deleted successfully') {
+          setNotes(notes.filter(note => note.id !== id)); // Remove note from list
+        }
+      })
+      .catch((err) => {
+        console.error('Error deleting note:', err);
+      });
+  };
+
+  const handleUpdate = (id, updatedTitle, updatedContent) => {
+    fetch(`http://127.0.0.1:5000/notes/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title: updatedTitle, content: updatedContent }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the notes state with the updated note data
+        setNotes(notes.map(note => note.id === id ? { ...note, title: updatedTitle, content: updatedContent } : note));
+      })
+      .catch((err) => {
+        console.error('Error updating note:', err);
+      });
+  };
+
+  return (
+    <div>
+      <h2>Your Notes</h2>
+      <ul>
+        {notes.map((note) => (
+          <li key={note.id}>
+            <h3>{note.title}</h3>
+            <p>{note.content}</p>
+            <button onClick={() => handleUpdate(note.id, prompt('Enter new title', note.title), prompt('Enter new content', note.content))}>Update</button>
+            <button onClick={() => handleDelete(note.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default NotesPage;
+export default NotesList;

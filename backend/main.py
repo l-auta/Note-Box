@@ -1,5 +1,5 @@
 from flask import Flask, session, request, flash,  jsonify
-from config import app, db
+from config import *
 import hashlib
 from models import User, Note
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -37,10 +37,6 @@ def login():
 def logout():
     return 'You have been logged out!'
 
-# NOTES ROUTE
-@app.route('/notes')
-def notes():
-    return 'Welcome to the notes page!'
 
 # HOMEPAGE ROUTE
 @app.route('/')

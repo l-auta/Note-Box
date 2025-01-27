@@ -16,6 +16,7 @@ const LoginPage = ({ onLoginSuccess }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       });
 
       const data = await response.json();
@@ -25,7 +26,7 @@ const LoginPage = ({ onLoginSuccess }) => {
         onLoginSuccess(); // Pass success message or trigger route change
       } else {
         // Show error message if login failed
-        setError(data.message);
+        setError(data.message || 'Login failed. Please try again.');
       }
     } catch (error) {
       setError('An error occurred. Please try again later.');
