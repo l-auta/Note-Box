@@ -1,4 +1,4 @@
-from flask import Flask, session, request, flash,  jsonify
+from flask import Flask, session, request, flash,  jsonify, redirect, url_for
 from config import *
 import hashlib
 from models import User, Note
@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # DEFINE THE ROUTES
 # LOGIN ROUTE
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     # Get data from the request
     data = request.get_json()
@@ -33,15 +33,12 @@ def login():
  
 
 # LOGOUT ROUTE
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
-    return 'You have been logged out!'
+    session.pop('user_id', None)
 
+    return jsonify ({'message': 'You have logged out successfully!'})
 
-# HOMEPAGE ROUTE
-@app.route('/')
-def home():
-    return 'Welcome to the home page!'
 
 # SIGNUP ROUTE
 @app.route('/signup', methods=['GET', 'POST'])
