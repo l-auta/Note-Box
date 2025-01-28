@@ -11,7 +11,7 @@ const LoginPage = ({ onLoginSuccess }) => {
 
     // Make API request to backend to verify login credentials
     try {
-      const response = await fetch('http://127.0.0.1:5000/login', {
+      const response = await fetch('https://127.0.0.1:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,27 +67,30 @@ const LoginPage = ({ onLoginSuccess }) => {
 
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
+      <h1 style={{ marginLeft: '10px' }} class="display-2">Login</h1>
+      <br />
+      <form style={{ marginLeft: '10px' }} onSubmit={handleLogin}>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email:</label>
           <input 
+            class="form-control"
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
             required 
           />
         </div>
-        <div>
+        <div class="mb-3">
           <label>Password:</label>
           <input 
+            class="form-control"
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
             required 
           />
         </div>
-        <button type="submit" >Login</button>
+        <button class="btn " type="submit" >Login</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
     </div>

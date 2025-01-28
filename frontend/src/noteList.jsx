@@ -8,7 +8,7 @@ const NotesList = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/notes', {
+        const response = await fetch('https://127.0.0.1:5000/notes', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const NotesList = () => {
 
 
   const handleDelete = (id) => {
-    fetch(`http://127.0.0.1:5000/notes/${id}`, { method: 'DELETE' })
+    fetch(`https://127.0.0.1:5000/notes/${id}`, { method: 'DELETE', credentials: 'include'})
       .then((response) => response.json())
       .then((data) => {
         if (data.message === 'Note deleted successfully') {
@@ -46,12 +46,13 @@ const NotesList = () => {
   };
 
   const handleUpdate = (id, updatedTitle, updatedContent) => {
-    fetch(`http://127.0.0.1:5000/notes/${id}`, {
+    fetch(`https://127.0.0.1:5000/notes/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ title: updatedTitle, content: updatedContent }),
+      credentials: 'include',  // Make sure cookies (session) are sent with the request  // Make sure cookies (session) are sent with the request  // Make sure cookies (session) are sent with the request  // Make sure cookies (session) are sent with the request  // Make sure cookies (session) are sent with the request  // Make sure cookies (session) are sent with the request  // Make sure cookies (session) are sent with the request  // Make
     })
       .then((response) => response.json())
       .then((data) => {
@@ -65,14 +66,14 @@ const NotesList = () => {
 
   return (
     <div>
-      <h2>Your Notes</h2>
-      <ul>
+      <h2 class="display-5">Your Notes</h2>
+      <ul class="list-group list-group-flush">
         {notes.map((note) => (
-          <li key={note.id}>
+          <li class="list-group-item" key={note.id}>
             <h3>{note.title}</h3>
             <p>{note.content}</p>
-            <button onClick={() => handleUpdate(note.id, prompt('Enter new title', note.title), prompt('Enter new content', note.content))}>Update</button>
-            <button onClick={() => handleDelete(note.id)}>Delete</button>
+            <button class="btn" onClick={() => handleUpdate(note.id, prompt('Enter new title', note.title), prompt('Enter new content', note.content))}>Update</button>
+            <button class="btn" onClick={() => handleDelete(note.id)}>Delete</button>
           </li>
         ))}
       </ul>

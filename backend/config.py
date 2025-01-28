@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///mydb.db'  # Replace with your 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable tracking modifications for efficiency
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_COOKIE_SECURE'] = True
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

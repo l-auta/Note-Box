@@ -3,7 +3,7 @@ import React from 'react';
 const LogoutButton = () => {
     const handleLogout = async () => {
         try {
-          const response = await fetch('http://127.0.0.1:5000/logout', {
+          const response = await fetch('https://127.0.0.1:5000/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const LogoutButton = () => {
       };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button class="btn btn-light" onClick={handleLogout}>Logout</button>
   );
 };
 

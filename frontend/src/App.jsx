@@ -8,6 +8,13 @@ import LogoutButton from './logoutButton';
 
 function App() {
   const [step, setStep] = useState(1); // Create state for conditional rendering
+  const [notes, setNotes] = useState([]); // State to hold the list of notes
+
+
+   // Function to handle adding a new note
+   const handleCreateNote = (newNote) => {
+    setNotes([...notes, newNote]);  // Add the new note to the existing notes list
+  };
 
   // A function to handle conditional rendering
   const handleSignupSuccess = () => {
@@ -40,8 +47,11 @@ function App() {
       {step === 2 && <LoginPage onLoginSuccess={handleLogInSuccess} />}
       {step === 3 && (
         <div>
-          <h1>Welcome to Your Notes App!</h1>
-          <CreateNote />
+          <h1 class="display-4"><b>Welcome to Your Notes App!</b></h1>
+          <br />
+          <CreateNote onCreate={handleCreateNote} />
+          <br />
+          <br />
           <NotesList />
           <LogoutButton />
         </div>
