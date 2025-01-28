@@ -41,9 +41,9 @@ function App() {
       {step === 3 && (
         <div>
           <h1>Welcome to Your Notes App!</h1>
-          <LogoutButton />
           <CreateNote />
           <NotesList />
+          <LogoutButton />
         </div>
       )}
     </>

@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # DEFINE THE ROUTES
 # LOGIN ROUTE
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST'])
 def login():
     # Get data from the request
     data = request.get_json()
@@ -123,13 +123,24 @@ def create_note():
 # get notes from the db
 @app.route('/notes', methods=['GET'])
 def get_notes():
-    user_id = session.get('user_id')  # Ensure the user is logged in
+    # Ensure the user is logged in
+    user_id = session.get('user_id')
     if not user_id:
         return jsonify({'message': 'You must be logged in to get notes'}), 401
 
-    notes = Note.query.filter_by(user_id=user_id).all()
+    try:
+        # Query notes for the logged-in user
+        notes = Note.query.filter_by(user_id=user_id).all()
 
-    return jsonify([{'id': note.id, 'title': note.title, 'content': note.content} for note in notes])
+        if not notes:
+            return jsonify({'message': 'No notes found for this user'}), 404
+
+        # Return the notes as a JSON response
+        return jsonify([{'id': note.id, 'title': note.title, 'content': note.content} for note in notes])
+
+    except Exception as e:
+        return jsonify({'message': f'An error occurred: {str(e)}'}), 500
+    
 
 # update notes in the db
 @app.route('/notes/<int:id>', methods=['PATCH'])
