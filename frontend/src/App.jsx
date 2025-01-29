@@ -8,37 +8,38 @@ import LogoutButton from './logoutButton';
 
 function App() {
   const [step, setStep] = useState(1); // Create state for conditional rendering
-  const [notes, setNotes] = useState([]); // State to hold the list of notes
+  const [notes, setNotes] = useState([]);
 
-
-   // Function to fetch notes from the API
-   const fetchNotes = () => {
-    fetch('https://127.0.0.1:5000/notes', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',  // Send cookies along with the request
-    })
-      .then(response => response.json())
-      .then(data => {
-        setNotes(data); // Set the notes data to the state
-      })
-      .catch(err => {
-        console.error('Error fetching notes:', err);
-      });
-  };
-
-  // Function to handle adding a new note
+// Function to handle adding a new note
   const handleCreateNote = (newNote) => {
     setNotes(prevNotes => [...prevNotes, newNote]);  // Add the new note to the existing notes list
   };
 
-  // Fetch notes when the component is mounted
   useEffect(() => {
-    fetchNotes();
-  }, []); // Empty dependency array ensures this runs only once, after the initial render
+    // Fetch notes when the component mounts (optional if you want to load initial notes)
+    const fetchNotes = async () => {
+      try {
+        const response = await fetch('https://127.0.0.1:5000/notes', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
 
+        if (response.ok) {
+          const data = await response.json();
+          setNotes(data);
+        }
+      } catch (err) {
+        console.error('Error fetching notes:', err);
+      }
+    };
+
+    fetchNotes();
+  }, []);
+
+  
   // A function to handle conditional rendering
   const handleSignupSuccess = () => {
     setStep(2); // Transition to login page after successful signup
@@ -75,7 +76,7 @@ function App() {
           <CreateNote onCreate={handleCreateNote} />
           <br />
           <br />
-          <NotesList notes={notes} />
+          <NotesList  notes={notes} setNotes={setNotes} />
           <LogoutButton />
         </div>
       )}
