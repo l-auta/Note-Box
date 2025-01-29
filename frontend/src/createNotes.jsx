@@ -22,6 +22,8 @@ const CreateNote = ({ onCreate }) => {
       .then(data => {
         if (data.id) {
           onCreate(data); // Update parent state to add the new note to the list
+          setTitle("");
+          setContent("");
         }
       })
       .catch(err => {

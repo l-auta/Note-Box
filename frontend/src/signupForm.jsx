@@ -15,7 +15,7 @@ function CreateUser({ onSignupSuccess }){
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password1, password2 }),
         };
-        fetch("http://127.0.0.1:5000/signup", requestOptions)
+        fetch("https://127.0.0.1:5000/signup", requestOptions)
             .then(response => response.json())
             .then(data => console.log(data))  // You can handle the response here
             .catch(error => window.alert('Error:', error));  // Handle any errors
