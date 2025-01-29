@@ -66,13 +66,13 @@ const NotesList = ({notes, setNotes}) => {
 
   return (
     <div>
-      <h2 className="display-5">Your Notes</h2>
+      <h2 className="display-5 gradient-text">Your Notes</h2>
       <ul className="list-group list-group-flush">
         {notes.length === 0 ? (
           <p>No notes available</p>
         ) : (
           notes.map((note) => (
-            <li className="list-group-item" key={note.id}>
+            <li className="list-group-item box" key={note.id}>
               <h3>{note.title}</h3>
               <p>{note.content}</p>
               <button

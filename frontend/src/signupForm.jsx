@@ -51,32 +51,32 @@ function CreateUser({ onSignupSuccess }){
 
     return (
         <>
-        <h1 style={{ marginLeft: '10px' }} class="display-2">Sign Up Form</h1>
+        <h1 style={{ marginLeft: '10px' }} class="display-2 gradient-text">Sign Up Form</h1>
         <p style={{ marginLeft: '10px' }} class="lead">Please fill in this form to create an account.</p>
         <br />
         <form class="container row" onSubmit={handleSubmit}>
             <div  class="row mb-3">
                 <label  class="form-label">
                     Username:
-                    <input type="text" class="form-control"  name="username" value={username} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" class="form-control box"  name="username" value={username} onChange={(e) => setName(e.target.value)} />
                 </label>
             </div>
             <div  class="row mb-3">
                 <label>
                     Email:
-                    <input type="email" class="form-control"  name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" class="form-control box"  name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
             </div>
             <div class="row mb-3"> 
                 <label>
                     Password:
-                    <input type="password" class="form-control" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" class="form-control box" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
                 </label>
             </div>
             <div class="row mb-3">
                 <label>
                     Confirm Password:
-                    <input type="password" class="form-control"  name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <input type="password" class="form-control box"  name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </label>
             </div>
             <br />
@@ -84,11 +84,11 @@ function CreateUser({ onSignupSuccess }){
         </form>
         < br />
         < br />
-        <div class="card text-center">
+        <div style={{ margin: '20px' }} class="card text-center">
             <div class="card-header">
                 Quote
             </div>
-            <div class="card-body">
+            <div class="card-body box">
                 <blockquote class="blockquote mb-0">
                     <p>You can make anything by writing</p>
                     <footer class="blockquote-footer">Anonymous</footer>

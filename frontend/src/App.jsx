@@ -70,13 +70,14 @@ function App() {
       {step === 1 && <CreateUser onSignupSuccess={handleSignupSuccess} />}
       {step === 2 && <LoginPage onLoginSuccess={handleLogInSuccess} />}
       {step === 3 && (
-        <div>
-          <h1 class="display-4"><b>Welcome to Your Notes App!</b></h1>
+        <div style={{ padding: '10px' }}>
+          <h1 class="display-4 gradient-text"><b>Welcome to Your Notes App!</b></h1>
           <br />
           <CreateNote onCreate={handleCreateNote} />
           <br />
           <br />
           <NotesList  notes={notes} setNotes={setNotes} />
+          <br />
           <LogoutButton />
         </div>
       )}

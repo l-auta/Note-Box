@@ -1,9 +1,21 @@
-/* body { */
-    /* background: linear-gradient(to top left, #ffb1a2, #fdc4bbfd, #faa493); Peachy tones for a calm feel */
-    /* font-family: 'Lora', serif; Serif font for elegance and readability */
-    /* color: #4f2f26; Deep brown for readability */
-    /* line-height: 1.8; */
-    /* margin: 0; */
-    /* padding: 20px; */
-  /* } */
+body {
+    /* background: linear-gradient(to bottom left,#eff9f0, #ddc8c4);  */
+    font-family: 'Lora', ;
+    color: #1a090d; 
+    background-color: #ecf0f3;
+    background-repeat: no-repeat;
+    padding: 20px;
+  }
   
+  .gradient-text {
+    background: linear-gradient(45deg, #b3c5d7, #7392b7); /* Define the gradient colors */
+    -webkit-background-clip: text; /* For Chrome, Safari, and Opera */
+    background-clip: text; /* For other browsers (might not be supported everywhere) */
+    color: transparent; /* Make the text color transparent so the gradient shows through */
+    font-weight: bold; /* Optional: make the text bold */
+    z-index: 10;
+}
+
+.box{
+  background-color: rgba(249, 252, 253, 0.938);
+}
