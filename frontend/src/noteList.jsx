@@ -1,35 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const NotesList = () => {
-  const [notes, setNotes] = useState([]);
-  const [error, setError] = useState('');
-
-  // Fetch notes when the component mounts
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const response = await fetch('https://127.0.0.1:5000/notes', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',  // Make sure cookies (session) are sent with the request
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setNotes(data); // Store the notes in state
-        } else {
-          const data = await response.json();
-          setError(data.message); // Show error message if the response is not OK
-        }
-      } catch (err) {
-        setError('An error occurred while fetching notes.'); // Handle fetch error
-      }
-    };
-
-    fetchNotes(); // Call the function when the component mounts
-  }, []); // Empty dependency array means this runs only once when the component mounts
+const NotesList = ({notes}) => {
+//   const [error, setError] = useState('');
 
 
   const handleDelete = (id) => {

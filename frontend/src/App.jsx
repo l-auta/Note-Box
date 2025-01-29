@@ -11,10 +11,33 @@ function App() {
   const [notes, setNotes] = useState([]); // State to hold the list of notes
 
 
-   // Function to handle adding a new note
-   const handleCreateNote = (newNote) => {
-    setNotes([...notes, newNote]);  // Add the new note to the existing notes list
+   // Function to fetch notes from the API
+   const fetchNotes = () => {
+    fetch('https://127.0.0.1:5000/notes', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',  // Send cookies along with the request
+    })
+      .then(response => response.json())
+      .then(data => {
+        setNotes(data); // Set the notes data to the state
+      })
+      .catch(err => {
+        console.error('Error fetching notes:', err);
+      });
   };
+
+  // Function to handle adding a new note
+  const handleCreateNote = (newNote) => {
+    setNotes(prevNotes => [...prevNotes, newNote]);  // Add the new note to the existing notes list
+  };
+
+  // Fetch notes when the component is mounted
+  useEffect(() => {
+    fetchNotes();
+  }, []); // Empty dependency array ensures this runs only once, after the initial render
 
   // A function to handle conditional rendering
   const handleSignupSuccess = () => {
@@ -52,7 +75,7 @@ function App() {
           <CreateNote onCreate={handleCreateNote} />
           <br />
           <br />
-          <NotesList />
+          <NotesList notes={notes} />
           <LogoutButton />
         </div>
       )}

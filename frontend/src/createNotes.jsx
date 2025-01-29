@@ -31,6 +31,7 @@ const CreateNote = ({ onCreate }) => {
       });
   };
 
+  
   return (
     <form onSubmit={handleSubmit}>
       <div class="mb-3">
