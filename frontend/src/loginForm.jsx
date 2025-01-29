@@ -45,7 +45,7 @@ const LoginPage = ({ onLoginSuccess }) => {
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Email:</label>
           <input 
-            class="form-control box"
+            class="form-control "
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
@@ -55,7 +55,7 @@ const LoginPage = ({ onLoginSuccess }) => {
         <div class="mb-3">
           <label>Password:</label>
           <input 
-            class="form-control box"
+            class="form-control"
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 

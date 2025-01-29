@@ -58,25 +58,25 @@ function CreateUser({ onSignupSuccess }){
             <div  class="row mb-3">
                 <label  class="form-label">
                     Username:
-                    <input type="text" class="form-control box"  name="username" value={username} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" class="form-control"  name="username" value={username} onChange={(e) => setName(e.target.value)} />
                 </label>
             </div>
             <div  class="row mb-3">
                 <label>
                     Email:
-                    <input type="email" class="form-control box"  name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" class="form-control"  name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
             </div>
             <div class="row mb-3"> 
                 <label>
                     Password:
-                    <input type="password" class="form-control box" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" class="form-control" id="floatingPassword" name="password1" value={password1} onChange={(e) => setPassword(e.target.value)} />
                 </label>
             </div>
             <div class="row mb-3">
                 <label>
                     Confirm Password:
-                    <input type="password" class="form-control box"  name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <input type="password" class="form-control"  name="password2" value={password2} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </label>
             </div>
             <br />
