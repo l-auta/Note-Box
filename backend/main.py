@@ -194,4 +194,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Create tables if they don't exist
 
-    app.run(ssl_context=('ssl/cert.pem', 'ssl/key_nopass.pem'), debug=True)
+    app.run(ssl_context=('ssl/cert.pem', 'ssl/key_nopass.pem'), debug=False)
