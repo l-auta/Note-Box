@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import CreateUser from './signupForm';
 import LoginPage from './loginForm';
 import CreateNote from './createNotes';
@@ -41,15 +41,15 @@ function App() {
 
   return (
     <Router>
-      <Switch>
+      <Routes>
         {/* Route for the signup page */}
         <Route path="/signup" exact>
-          <CreateUser onSignupSuccess={() => <Redirect to="/login" />} />
+          <CreateUser onSignupSuccess={() => <Navigate to="/login" />} />
         </Route>
 
         {/* Route for the login page */}
         <Route path="/login" exact>
-          <LoginPage onLoginSuccess={() => <Redirect to="/notes" />} />
+          <LoginPage onLoginSuccess={() => <Navigate to="/notes" />} />
         </Route>
 
         {/* Route for the notes page */}
@@ -67,8 +67,8 @@ function App() {
         </Route>
 
         {/* Redirect to /login if no route matches */}
-        <Redirect to="/login" />
-      </Switch>
+        <Navigate to="/login" />
+      </Routes>
     </Router>
   );
 }
