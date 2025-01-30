@@ -2,10 +2,10 @@ from flask import Flask, session, request, flash,  jsonify, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-from backend.config import Config  # Import the Config class
-from backend.extensions import db
+from config import Config  # Import the Config class
+from extensions import db
 import hashlib
-from backend.models import User, Note
+from models import User, Note
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
