@@ -4,6 +4,7 @@ import hashlib
 from models import User, Note
 from werkzeug.security import generate_password_hash, check_password_hash
 
+app = Flask(__name__)
 # DEFINE THE ROUTES
 # LOGIN ROUTE
 @app.route('/login', methods=['POST'])
