@@ -2,10 +2,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-from main import app
 
 
-# app = Flask(__name__)
+app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 app.config['SECRET_KEY'] = '8l@ck8901d'  # Replace with your secret key
