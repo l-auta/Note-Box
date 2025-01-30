@@ -11,7 +11,7 @@
 
 ## Live Preview
 - **Backend** https://phase-4-project-3-o2io.onrender.com
-- **Frontend**https://stupendous-bublanina-9aeaa3.netlify.app/
+- **Frontend**https://note5-taking-app.netlify.app/
 
 ## Setup and Installation
 - Clone the repository after forking it to get it on your local machine.
