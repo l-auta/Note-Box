@@ -8,7 +8,7 @@ body {
   }
   
   .gradient-text {
-    background: linear-gradient(45deg, #b3c5d7, #7392b7); /* Define the gradient colors */
+    background: linear-gradient(45deg, #bfd1e2, #6987ac); /* Define the gradient colors */
     -webkit-background-clip: text; /* For Chrome, Safari, and Opera */
     background-clip: text; /* For other browsers (might not be supported everywhere) */
     color: transparent; /* Make the text color transparent so the gradient shows through */
