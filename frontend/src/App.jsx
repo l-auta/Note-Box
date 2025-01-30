@@ -78,7 +78,7 @@ function App() {
           <br />
           <NotesList  notes={notes} setNotes={setNotes} />
           <br />
-          <LogoutButton />
+          {/* <LogoutButton /> */}
         </div>
       )}
     </>
