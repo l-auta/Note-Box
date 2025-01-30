@@ -1,17 +1,7 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_cors import CORS
-from main import app
-
-CORS(app, supports_credentials=True)
-
-app.config['SECRET_KEY'] = '8l@ck8901d'  # Replace with your secret key
-app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///mydb.db'  # Replace with your database URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable tracking modifications for efficiency
-app.config['SESSION_PERMANENT'] = True
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = True
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+class Config:
+    SECRET_KEY = '8l@ck8901d'  # Replace with your secret key
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///mydb.db'  # Replace with your database URI
+    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable tracking modifications for efficiency
+    SESSION_PERMANENT = True
+    SESSION_COOKIE_SAMESITE = 'None'
+    SESSION_COOKIE_SECURE = True

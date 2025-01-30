@@ -1,10 +1,22 @@
 from flask import Flask, session, request, flash,  jsonify, redirect, url_for
-from config import *
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_cors import CORS
+from backend.config import Config  # Import the Config class
+from backend.extensions import db
 import hashlib
-from models import User, Note
+from backend.models import User, Note
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+
+# Apply the configurations
+app.config.from_object(Config)
+
+# Set up extensions
+db.init_app(app)  # Initialize db here
+migrate = Migrate(app, db)
+CORS(app, supports_credentials=True)
 # DEFINE THE ROUTES
 # LOGIN ROUTE
 @app.route('/login', methods=['POST'])
@@ -190,8 +202,8 @@ def delete_note(id):
         return jsonify({'error': str(e)}), 500
     
 
-# if __name__ == '__main__':
-#     with app.app_context():
-#         db.create_all()  # Create tables if they don't exist
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # Create tables if they don't exist
 
-#     app.run(ssl_context=('ssl/cert.pem', 'ssl/key_nopass.pem'), debug=False)
+    app.run(ssl_context=('ssl/cert.pem', 'ssl/key_nopass.pem'), debug=False)
