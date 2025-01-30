@@ -3,7 +3,7 @@ import React from 'react';
 const LogoutButton = () => {
     const handleLogout = async () => {
         try {
-          const response = await fetch('https://127.0.0.1:5000/logout', {
+          const response = await fetch('https://phase-4-project-3-o2io.onrender.com/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

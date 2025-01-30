@@ -7,7 +7,7 @@ const NotesList = ({notes, setNotes}) => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await fetch('https://127.0.0.1:5000/notes', {
+        const response = await fetch('https://phase-4-project-3-o2io.onrender.com/notes', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const NotesList = ({notes, setNotes}) => {
 
   // Handle deleting a note
   const handleDelete = (id) => {
-    fetch(`https://127.0.0.1:5000/notes/${id}`, { method: 'DELETE', credentials: 'include' })
+    fetch(`https://phase-4-project-3-o2io.onrender.com/notes/${id}`, { method: 'DELETE', credentials: 'include' })
       .then((response) => response.json())
       .then((data) => {
         if (data.message === 'Note deleted successfully') {
@@ -46,7 +46,7 @@ const NotesList = ({notes, setNotes}) => {
 
   // Handle updating a note
   const handleUpdate = (id, updatedTitle, updatedContent) => {
-    fetch(`https://127.0.0.1:5000/notes/${id}`, {
+    fetch(`https://phase-4-project-3-o2io.onrender.com/notes/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

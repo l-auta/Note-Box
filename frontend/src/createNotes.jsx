@@ -10,7 +10,7 @@ const CreateNote = ({ onCreate }) => {
     // const newNote = { title, content };
     
     // POST request to create a new note
-    fetch('https://127.0.0.1:5000/notes', {
+    fetch('https://phase-4-project-3-o2io.onrender.com/notes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

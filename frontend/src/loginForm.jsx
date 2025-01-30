@@ -11,7 +11,7 @@ const LoginPage = ({ onLoginSuccess }) => {
 
     // Make API request to backend to verify login credentials
     try {
-      const response = await fetch('https://127.0.0.1:5000/login', {
+      const response = await fetch('https://phase-4-project-3-o2io.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

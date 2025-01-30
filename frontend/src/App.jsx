@@ -19,7 +19,7 @@ function App() {
     // Fetch notes when the component mounts (optional if you want to load initial notes)
     const fetchNotes = async () => {
       try {
-        const response = await fetch('https://127.0.0.1:5000/notes', {
+        const response = await fetch('https://phase-4-project-3-o2io.onrender.com/notes', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
