@@ -49,6 +49,8 @@ def login():
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
+     # Redirect to login page
+    redirect('/login')
 
     return jsonify ({'message': 'You have logged out successfully!'})
 
