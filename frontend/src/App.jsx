@@ -74,6 +74,7 @@ function AppRoutes() {
             <h1 className="display-4 gradient-text"><b>Welcome to Your Notes App!</b></h1>
             <CreateNote onCreate={handleCreateNote} />
             <NotesList notes={notes} setNotes={setNotes} />
+            <br />
             <LogoutButton />
           </div>
         ) : (
