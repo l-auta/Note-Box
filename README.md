@@ -2,7 +2,7 @@
 ### Created by Lisa Auta
  
  ## Overview
- A simple note taking application that requires a user to sign up then login to be ale to access the sector where they can add their notes. The application allows the user to also delete or update their notes depending on their given circumstances.
+ A simple note taking application that requires a user to sign up then login to be ale to access the sector where they can add their notes. The application allows the user to also delete or update their notes depending on their given circumstances. Additionally, the user can logout at any moment and when they login later, their notes will still be available, if any was added.
 
 ## Technologies Used
 - **React and Javascript** for the frontend development
