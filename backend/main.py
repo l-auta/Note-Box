@@ -68,32 +68,26 @@ def signUp():
         # Check if user with the same email exists
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('Email already exists!', category='error')
             return jsonify({"error": "Email already exists!"}), 400
 
         # Check if email length is valid
         elif len(email) < 5:
-            flash('Email should be at least 5 characters long!', category='error')
             return jsonify({"error": "Email should be at least 5 characters long!"}), 400
 
         # Check if username length is valid
         elif len(username) < 2:
-            flash('Username must be at least 2 characters long!', category='error')
             return jsonify({"error": "Username must be at least 2 characters long!"}), 400
 
         # Check if passwords are provided
         elif password1 is None or password2 is None:
-            flash("Password is required", category='error')
             return jsonify({"error": "Password is required"}), 400
 
         # Check if passwords match
         elif password1 != password2:
-            flash('Passwords do not match!', category='error')
             return jsonify({"error": "Passwords do not match!"}), 400
 
         # Check if password length is valid
         elif len(password1) < 5:
-            flash('Password should be at least 5 characters long!', category='error')
             return jsonify({"error": "Password should be at least 5 characters long!"}), 400
 
         # Hash the password
