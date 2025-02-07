@@ -1,4 +1,4 @@
-from flask import Flask, session, request, flash,  jsonify, redirect, url_for
+from flask import Flask, session, request, flash,  jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
