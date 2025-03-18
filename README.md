@@ -1,4 +1,4 @@
-# Simple Notes Application
+# Notebox Application
 ### Created by Lisa Auta
  
  ## Overview
